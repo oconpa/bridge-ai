@@ -1,4 +1,3 @@
-import { I18nProvider } from "@cloudscape-design/components/i18n";
 import {
   AppLayout,
   BreadcrumbGroup,
@@ -9,17 +8,11 @@ import {
   FormField,
   Header,
   Input,
-  Link,
-  SideNavigation,
   SpaceBetween,
   SplitPanel,
   Tabs,
 } from "@cloudscape-design/components";
-import messages from "@cloudscape-design/components/i18n/messages/all.en";
-import { applyMode, Mode } from "@cloudscape-design/global-styles";
-import { useEffect, useState } from "react";
-
-const LOCALE = "en";
+import { useState } from "react";
 
 const LabelForm = ({ labelId, labelName, onSubmit }) => {
   const [links, setLinks] = useState(["", "", "", "", ""]);
@@ -72,10 +65,6 @@ const LabelForm = ({ labelId, labelName, onSubmit }) => {
 };
 
 export const App = () => {
-  useEffect(() => {
-    applyMode(Mode.Dark);
-  }, []);
-
   const handleFormSubmit = async (labelId, links) => {
     console.log(`Submitting links for ${labelId}:`, links);
     try {
@@ -96,50 +85,24 @@ export const App = () => {
     }
   };
 
-  const tabs = [
-    { id: "tax", label: "Tax" },
-    { id: "job-search", label: "Job Search" },
-    { id: "schedule-meetings", label: "Schedule Meetings" },
-  ];
-
   return (
-    <I18nProvider locale={LOCALE} messages={[messages]}>
-      <AppLayout
-        breadcrumbs={
-          <BreadcrumbGroup
-            items={[
-              { text: "Home", href: "#" },
-              { text: "Spec Generator", href: "#" },
-            ]}
-          />
-        }
-        content={
-          <ContentLayout
-            header={<Header variant="h1">Spec Sheet Generator</Header>}
-          >
-            <Tabs
-              tabs={tabs.map((tab) => ({
-                label: tab.label,
-                id: tab.id,
-                content: (
-                  <LabelForm
-                    labelId={tab.id}
-                    labelName={tab.label}
-                    onSubmit={handleFormSubmit}
-                  />
-                ),
-              }))}
-            />
-          </ContentLayout>
-        }
-        splitPanel={
-          <SplitPanel header="Instructions">
-            Enter up to 5 links related to the selected task category. Once
-            submitted, the app will scrape the content, send it to Llama, and
-            generate a spec sheet saved to the corresponding folder.
-          </SplitPanel>
-        }
-      />
-    </I18nProvider>
+    <AppLayout
+      breadcrumbs={
+        <BreadcrumbGroup
+          items={[
+            { text: "Home", href: "#" },
+            { text: "Spec Generator", href: "#" },
+          ]}
+        />
+      }
+      content={}
+      splitPanel={
+        <SplitPanel header="Instructions">
+          Enter up to 5 links related to the selected task category. Once
+          submitted, the app will scrape the content, send it to Llama, and
+          generate a spec sheet saved to the corresponding folder.
+        </SplitPanel>
+      }
+    />
   );
 };
