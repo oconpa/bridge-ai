@@ -1,54 +1,53 @@
-# React + TypeScript + Vite
+# Bridge AI Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend application for Bridge AI, featuring integration with Ollama for local AI capabilities.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Node.js** - Ensure you have Node.js installed (v16+)
 
-## Expanding the ESLint configuration
+2. **pnpm** - This project uses pnpm as the package manager
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3. **Ollama** - To use the Ollama integration, you must have Ollama installed and running locally
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+   - Install Ollama by following instructions at: https://ollama.com/download
+   - Run Ollama and ensure it's available at http://localhost:11434
+   - Pull at least one model (e.g., `ollama pull llama3`)
+
+## Getting Started
+
+1. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+2. Start the development server:
+
+   ```bash
+   pnpm dev
+   ```
+
+3. Open your browser to http://localhost:5173
+
+## Using Ollama Integration
+
+1. Ensure Ollama is running locally
+2. Navigate to the "Ollama" tab in the application
+3. Select a model from the dropdown (requires models to be installed through Ollama)
+4. Enter a prompt and click "Generate"
+5. View the AI-generated response
+
+You can use streaming mode by toggling the "Use streaming" option, which will stream the response as it's being generated.
+
+## Available Models
+
+The dropdown will automatically show all models installed in your local Ollama instance. If you don't see any models, ensure Ollama is running and that you have pulled at least one model:
+
+```bash
+ollama pull llama4
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Configuration
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+The Ollama API client is configured to connect to http://localhost:11434 by default. If your Ollama instance is running on a different address, update the `OLLAMA_URL` constant in `/src/api/ollama.ts`.

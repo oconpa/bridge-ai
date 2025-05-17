@@ -30,9 +30,9 @@ The Trump administration has introduced a controversial tax measure that could l
 
 **Timeline**
 
-* Continue to monitor developments on the tax measure
-* Attend hearings and briefings related to the bill (TBD)
-* Share updates and information on social media platforms (Ongoing)
+- Continue to monitor developments on the tax measure
+- Attend hearings and briefings related to the bill (TBD)
+- Share updates and information on social media platforms (Ongoing)
 
 **Assessment**
 
@@ -44,9 +44,9 @@ Moderate (6/10)
 
 Reasoning:
 
-* The severity of the issue: 8/10
-* The likelihood of implementation: 7/10
-* The potential impact on nonprofits: 9/10
+- The severity of the issue: 8/10
+- The likelihood of implementation: 7/10
+- The potential impact on nonprofits: 9/10
 
 Overall Assessment:
 

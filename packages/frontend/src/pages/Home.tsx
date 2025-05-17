@@ -1,3 +1,4 @@
+import { OllamaSpecGeneration } from "../components/OllamaDemo";
 import { useState } from "react";
 
 import {
@@ -29,6 +30,7 @@ export const Home = () => {
     { id: "tax", label: "Tax" },
     { id: "job-search", label: "Job Search" },
     { id: "schedule-meetings", label: "Schedule Meetings" },
+    { id: "ollama", label: "Ollama" },
   ];
 
   return (
@@ -38,13 +40,8 @@ export const Home = () => {
           label,
           id,
           content: (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.log(e);
-              }}
-            >
-              <Form actions={<Button variant="primary">Submit</Button>}>
+            <Form>
+              <SpaceBetween size={"l"}>
                 <Container
                   header={<Header variant="h2">Provide tab links</Header>}
                 >
@@ -70,8 +67,10 @@ export const Home = () => {
                     </Button>
                   </SpaceBetween>
                 </Container>
-              </Form>
-            </form>
+
+                <OllamaSpecGeneration />
+              </SpaceBetween>
+            </Form>
           ),
         }))}
       />
