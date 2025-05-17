@@ -44,13 +44,7 @@ export const Home = () => {
                 console.log(e);
               }}
             >
-              <Form
-                actions={
-                  <SpaceBetween direction="horizontal" size="xs">
-                    <Button variant="primary">Submit</Button>
-                  </SpaceBetween>
-                }
-              >
+              <Form actions={<Button variant="primary">Submit</Button>}>
                 <Container
                   header={<Header variant="h2">Provide tab links</Header>}
                 >
