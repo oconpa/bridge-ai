@@ -1,0 +1,12 @@
+{
+  "name": "bridge-ai",
+  "version": "1.0.0",
+  "author": "Patrick O'Connor",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "pnpm --filter frontend dev",
+    "build": "pnpm --filter frontend build",
+    "graphql": "pnpm --filter frontend graphql",
+    "cdk": "pnpm --filter infra cdk"
+  }
+}
