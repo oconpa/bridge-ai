@@ -10,7 +10,7 @@ export const Delegate = () => {
   return (
     <ContentLayout header={<Header variant="h1">Delegate</Header>}>
       <Container header={<Header variant="h2">Upload Spec</Header>}>
-        <FileUploader path="spec/" maxFileCount={1} />
+        <FileUploader path="" maxFileCount={1} />
       </Container>
     </ContentLayout>
   );
