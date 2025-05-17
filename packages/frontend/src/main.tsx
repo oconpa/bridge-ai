@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
-import { App } from "./App.tsx";
+import { App } from "./AppOld.tsx";
 
 import "@cloudscape-design/global-styles/index.css";
 
