@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { uploadData } from "aws-amplify/storage";
+import { uploadData, downloadData } from "aws-amplify/storage";
 
 interface IUploadDataS3Props {
   path: string;
@@ -15,6 +15,19 @@ export const useUploadDataS3 = () => {
       }).result;
 
       return result;
+    },
+  });
+};
+
+export const useGetDataS3 = () => {
+  return useMutation({
+    mutationFn: async (path: string) => {
+      const { body } = await downloadData({
+        path,
+      }).result;
+
+      const text = await body.text();
+      return text;
     },
   });
 };

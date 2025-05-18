@@ -1,4 +1,4 @@
-import { OllamaSpecGeneration } from "../components/OllamaDemo";
+import { OllamaSpecGeneration } from "./OllamaSpecGeneration";
 import { useState } from "react";
 
 import {

@@ -1,6 +1,6 @@
-import { useOllamaCompletion, useOllamaStream } from "../api/useOllama";
-import { useUploadDataS3 } from "../api/mutation";
-import { useOllamaModels } from "../api/query";
+import { useOllamaCompletion, useOllamaStream } from "../../api/useOllama";
+import { useUploadDataS3 } from "../../api/mutation";
+import { useOllamaModels } from "../../api/query";
 import { useState } from "react";
 
 import {
@@ -15,16 +15,25 @@ import {
   Spinner,
   Select,
 } from "@cloudscape-design/components";
+import type { UseMutationResult } from "@tanstack/react-query";
 
-interface IOllamaSpecGeneration {
-  links: string[];
+interface IOllamaDelegate {
+  spec: UseMutationResult<string, Error, string, unknown>;
 }
 
-export const OllamaSpecGeneration = ({ links }: IOllamaSpecGeneration) => {
+export const OllamaDelegate = ({ spec }: IOllamaDelegate) => {
   const [prompt, setPrompt] = useState(
-    `Create a technical spec from this content, with clear sections like Overview, Key Insights, and Next Steps:
+    `You are an autonomous assistant. Your job is to bite sized tasks based on a technical spec document.
 
-I'm a student at Stanford who wants to file taxes`
+Given the following technical spec, generate a list of brief, executable instructions related to the topic. Each instruction should be extremely short and properly delineated. Assume you have access to the web and can read or research publicly available information, but use the spec doc for insights.
+
+Instructions should be clear, practical, and aimed at investigating or acting on the topics within the spec.
+
+Return nothing more than a list of instructions numbered, bite size with each line being an instruction.
+
+---
+
+${spec.data}`
   );
 
   const [useStreaming, setUseStreaming] = useState(true);
@@ -82,8 +91,6 @@ I'm a student at Stanford who wants to file taxes`
     } else {
       resetCompletion();
     }
-
-    console.log(links);
 
     const params = {
       prompt,
@@ -212,7 +219,7 @@ I'm a student at Stanford who wants to file taxes`
                     onClick={handleUpload}
                     loading={uploadData.isPending}
                   >
-                    Save Spec
+                    Execute
                   </Button>
                 </SpaceBetween>
               }
