@@ -1,5 +1,5 @@
 import { OllamaSpecGeneration } from "./OllamaSpecGeneration";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Button,
@@ -15,6 +15,13 @@ import {
 
 export const Home = () => {
   const [links, setLinks] = useState([""]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/tabs")
+      .then((res) => res.json())
+      .then((data) => setLinks(data.urls))
+      .catch((err) => console.error("❌ Error fetching tabs:", err));
+  }, []);
 
   const set = (index: number, value: string) => {
     const newLinks = [...links];

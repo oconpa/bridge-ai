@@ -1,0 +1,13 @@
+{
+  "name": "Bridge Tab Scraper",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["tabs", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Scrape Open Tabs"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

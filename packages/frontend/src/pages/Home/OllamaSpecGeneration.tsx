@@ -22,9 +22,7 @@ interface IOllamaSpecGeneration {
 
 export const OllamaSpecGeneration = ({ links }: IOllamaSpecGeneration) => {
   const [prompt, setPrompt] = useState(
-    `Create a technical spec from this content, with clear sections like Overview, Key Insights, and Next Steps:
-
-I'm a student at Stanford who wants to file taxes`
+    `Create a technical spec from this content, with clear sections like Overview, Key Insights, and Next Steps:`
   );
 
   const [useStreaming, setUseStreaming] = useState(true);
@@ -83,10 +81,20 @@ I'm a student at Stanford who wants to file taxes`
       resetCompletion();
     }
 
-    console.log(links);
+    const scrapeRes = await fetch("http://localhost:8080/api/scrape", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ links }),
+    });
+
+    const { scrapedSections } = await scrapeRes.json();
+
+    const new_prompt = `${prompt}\n\n---\n\nScraped content:\n\n${scrapedSections.join(
+      "\n\n---\n\n"
+    )}`;
 
     const params = {
-      prompt,
+      prompt: new_prompt,
       model: selectedModel,
       temperature,
     };
@@ -177,6 +185,7 @@ I'm a student at Stanford who wants to file taxes`
             <Button
               variant="primary"
               formAction="submit"
+              loading={isCompletionLoading}
               disabled={!prompt.trim() || isLoading}
             >
               {isLoading ? "Generating..." : "Generate"}
