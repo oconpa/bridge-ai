@@ -1,4 +1,5 @@
 import { useOllamaCompletion, useOllamaStream } from "../../api/useOllama";
+import type { UseMutationResult } from "@tanstack/react-query";
 import { useOllamaModels } from "../../api/query";
 import { useState } from "react";
 
@@ -14,7 +15,6 @@ import {
   Spinner,
   Select,
 } from "@cloudscape-design/components";
-import type { UseMutationResult } from "@tanstack/react-query";
 
 interface IOllamaDelegate {
   spec: UseMutationResult<string, Error, string, unknown>;
