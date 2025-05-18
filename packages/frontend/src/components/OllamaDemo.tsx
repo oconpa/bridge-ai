@@ -16,7 +16,11 @@ import {
   Select,
 } from "@cloudscape-design/components";
 
-export const OllamaSpecGeneration = () => {
+interface IOllamaSpecGeneration {
+  links: string[];
+}
+
+export const OllamaSpecGeneration = ({ links }: IOllamaSpecGeneration) => {
   const [prompt, setPrompt] = useState(
     `Create a technical spec from this content, with clear sections like Overview, Key Insights, and Next Steps:
 
@@ -78,6 +82,8 @@ I'm a student at Stanford who wants to file taxes`
     } else {
       resetCompletion();
     }
+
+    console.log(links);
 
     const params = {
       prompt,

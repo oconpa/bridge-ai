@@ -14,15 +14,11 @@ import {
 } from "@cloudscape-design/components";
 
 export const Home = () => {
-  const [links, setLinks] = useState([
-    {
-      link: "",
-    },
-  ]);
+  const [links, setLinks] = useState([""]);
 
   const set = (index: number, value: string) => {
     const newLinks = [...links];
-    newLinks[index] = { link: value };
+    newLinks[index] = value;
     setLinks(newLinks);
   };
 
@@ -30,7 +26,6 @@ export const Home = () => {
     { id: "tax", label: "Tax" },
     { id: "job-search", label: "Job Search" },
     { id: "schedule-meetings", label: "Schedule Meetings" },
-    { id: "ollama", label: "Ollama" },
   ];
 
   return (
@@ -46,7 +41,7 @@ export const Home = () => {
                   header={<Header variant="h2">Provide tab links</Header>}
                 >
                   <SpaceBetween direction="vertical" size="l">
-                    {links.map(({ link }, index) => (
+                    {links.map((link, index) => (
                       <FormField label={`Link ${index + 1}`} key={index}>
                         <Input
                           value={link}
@@ -60,7 +55,7 @@ export const Home = () => {
                       variant="link"
                       iconName="add-plus"
                       onClick={() => {
-                        setLinks((prevItems) => [...prevItems, { link: "" }]);
+                        setLinks((prevItems) => [...prevItems, ""]);
                       }}
                     >
                       Add link
@@ -68,7 +63,7 @@ export const Home = () => {
                   </SpaceBetween>
                 </Container>
 
-                <OllamaSpecGeneration />
+                <OllamaSpecGeneration links={links} />
               </SpaceBetween>
             </Form>
           ),
