@@ -120,8 +120,8 @@ ${spec.data}`
     }
   };
 
-  const handleUpload = () => {
-    uploadData.mutateAsync({ path: "test.md", data: result });
+  const handleExecute = () => {
+    // Call Nova Act SDK here
   };
 
   return (
@@ -216,7 +216,7 @@ ${spec.data}`
                     disabled={isLoading}
                     variant="primary"
                     formAction="none"
-                    onClick={handleUpload}
+                    onClick={handleExecute}
                     loading={uploadData.isPending}
                   >
                     Execute
