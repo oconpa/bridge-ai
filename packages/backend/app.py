@@ -24,16 +24,21 @@ def execute_instructions(instructions, record_video: bool = False) -> dict:
         # Split instructions by newlines and filter out empty lines
         instruction_lines = parse_numbered_lines(instructions)
 
-        # Execute each instruction
+        results = []
+
         for instruction in instruction_lines:
-            # Remove any numbering (like "1.") at the beginning
             clean_instruction = instruction
             if "." in instruction.split(" ")[0]:
                 clean_instruction = " ".join(instruction.split(" ")[1:])
 
-            nova.act(clean_instruction)
+            try:
+                results.append(nova.act(clean_instruction))
+            except Exception:
+                print(f"I wasn't able to do:{clean_instruction}")
 
-    return {"status": "success", "message": "Instructions executed successfully"}
+            results.append(nova.act(clean_instruction))
+
+    return jsonify({"status": "ok", "message": results})
 
 
 @app.route("/", methods=["GET"])

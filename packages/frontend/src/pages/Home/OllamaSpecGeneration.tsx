@@ -22,7 +22,7 @@ interface IOllamaSpecGeneration {
 
 export const OllamaSpecGeneration = ({ links }: IOllamaSpecGeneration) => {
   const [prompt, setPrompt] = useState(
-    `Using the exact links I want you to infer the task at hand. For example if you see someone asking to book a meeting you should plan by drafting an email related to what they were talking about.`
+    `Using the exact links I want you to infer the task at hand. Provide me a details spec of the links consolidated together, and at the end infer what I'm trying to do.`
   );
 
   const [useStreaming, setUseStreaming] = useState(true);
