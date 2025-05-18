@@ -45,5 +45,5 @@ ${scraped.join('\n\n---\n\n')}
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
   const filepath = path.join(dir, `${label}.md`);
   fs.writeFileSync(filepath, markdown);
-  console.log(`✅ Spec saved to ${filepath}`);
+  console.log(`New spec doc was saved to ${filepath}`);
 }
