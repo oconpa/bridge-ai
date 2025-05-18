@@ -29,6 +29,7 @@ dist-ssr
 node_modules
 
 !server.js
+!background.js
 # CDK asset staging directory
 .cdk.staging
 cdk.out
