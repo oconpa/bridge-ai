@@ -13,7 +13,9 @@ import {
   Toggle,
   Spinner,
   Select,
+  StatusIndicator,
 } from "@cloudscape-design/components";
+import { useUploadDataS3 } from "../api/mutation";
 
 export const OllamaSpecGeneration = () => {
   const [prompt, setPrompt] = useState(
@@ -25,6 +27,8 @@ I'm a student at Stanford who wants to file taxes`
   const [useStreaming, setUseStreaming] = useState(true);
   const [selectedModel, setSelectedModel] = useState<string>("llama3:8b");
   const [temperature, setTemperature] = useState<number>(0.7);
+
+  const uploadData = useUploadDataS3();
 
   // Get model list using the hook
   const {
@@ -102,6 +106,10 @@ I'm a student at Stanford who wants to file taxes`
     if (useStreaming && isStreamLoading) {
       cancelStream();
     }
+  };
+
+  const handleUpload = () => {
+    uploadData.mutateAsync({ path: "test.md", data: result });
   };
 
   return (
@@ -190,13 +198,18 @@ I'm a student at Stanford who wants to file taxes`
             <Container
               header={<Header variant="h3">Response</Header>}
               footer={
-                <Button
-                  disabled={isLoading}
-                  variant="primary"
-                  formAction="none"
-                >
-                  Save Spec
-                </Button>
+                <SpaceBetween size="l">
+                  <Button
+                    iconName={uploadData.isSuccess ? "check" : undefined}
+                    disabled={isLoading}
+                    variant="primary"
+                    formAction="none"
+                    onClick={handleUpload}
+                    loading={uploadData.isPending}
+                  >
+                    Save Spec
+                  </Button>
+                </SpaceBetween>
               }
             >
               <div style={{ whiteSpace: "pre-wrap", fontFamily: "monospace" }}>
