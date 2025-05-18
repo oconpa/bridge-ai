@@ -1,5 +1,4 @@
 import { useOllamaCompletion, useOllamaStream } from "../../api/useOllama";
-import { useUploadDataS3 } from "../../api/mutation";
 import { useOllamaModels } from "../../api/query";
 import { useState } from "react";
 
@@ -40,7 +39,7 @@ ${spec.data}`
   const [selectedModel, setSelectedModel] = useState<string>("llama3:8b");
   const [temperature, setTemperature] = useState<number>(0.7);
 
-  const uploadData = useUploadDataS3();
+  const [novaAct, setNovaAct] = useState(false);
 
   // Get model list using the hook
   const {
@@ -120,8 +119,25 @@ ${spec.data}`
     }
   };
 
-  const handleExecute = () => {
-    // Call Nova Act SDK here
+  const handleExecute = async () => {
+    setNovaAct(true);
+    // Call backend Flask app with the result text
+    fetch("http://localhost:5000/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ instructions: result }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setNovaAct(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setNovaAct(false);
+      });
   };
 
   return (
@@ -212,12 +228,11 @@ ${spec.data}`
               footer={
                 <SpaceBetween size="l">
                   <Button
-                    iconName={uploadData.isSuccess ? "check" : undefined}
                     disabled={isLoading}
                     variant="primary"
                     formAction="none"
                     onClick={handleExecute}
-                    loading={uploadData.isPending}
+                    loading={novaAct}
                   >
                     Execute
                   </Button>
