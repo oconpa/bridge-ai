@@ -1,4 +1,5 @@
 import { useOllamaCompletion, useOllamaStream } from "../api/useOllama";
+import { useUploadDataS3 } from "../api/mutation";
 import { useOllamaModels } from "../api/query";
 import { useState } from "react";
 
@@ -13,9 +14,7 @@ import {
   Toggle,
   Spinner,
   Select,
-  StatusIndicator,
 } from "@cloudscape-design/components";
-import { useUploadDataS3 } from "../api/mutation";
 
 export const OllamaSpecGeneration = () => {
   const [prompt, setPrompt] = useState(
