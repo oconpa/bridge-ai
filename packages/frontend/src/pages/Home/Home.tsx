@@ -29,6 +29,10 @@ export const Home = () => {
     setLinks(newLinks);
   };
 
+  const remove = (index: number) => {
+    setLinks((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
+  };
+
   const tabs = [
     { id: "tax", label: "Tax" },
     { id: "job-search", label: "Job Search" },
@@ -50,11 +54,17 @@ export const Home = () => {
                   <SpaceBetween direction="vertical" size="l">
                     {links.map((link, index) => (
                       <FormField label={`Link ${index + 1}`} key={index}>
-                        <Input
-                          value={link}
-                          placeholder="https://example.com"
-                          onChange={({ detail }) => set(index, detail.value)}
-                        />
+                        <SpaceBetween size="l">
+                          <Input
+                            value={link}
+                            placeholder="https://example.com"
+                            onChange={({ detail }) => set(index, detail.value)}
+                          />
+                          <Button
+                            onClick={() => remove(index)}
+                            iconName="remove"
+                          />
+                        </SpaceBetween>
                       </FormField>
                     ))}
 

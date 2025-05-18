@@ -22,7 +22,7 @@ interface IOllamaSpecGeneration {
 
 export const OllamaSpecGeneration = ({ links }: IOllamaSpecGeneration) => {
   const [prompt, setPrompt] = useState(
-    `Create a technical spec from this content, with clear sections like Overview, Key Insights, and Next Steps:`
+    `Using the exact links I want you to infer the task at hand. For example if you see someone asking to book a meeting you should plan by drafting an email related to what they were talking about.`
   );
 
   const [useStreaming, setUseStreaming] = useState(true);

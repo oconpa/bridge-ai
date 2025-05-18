@@ -1,4 +1,6 @@
 import { FileUploader } from "@aws-amplify/ui-react-storage";
+import { OllamaDelegate } from "./OllamaDelegate";
+import { useGetDataS3 } from "../../api/mutation";
 import { useListS3 } from "../../api/query";
 import { useState } from "react";
 
@@ -11,8 +13,6 @@ import {
   Select,
   SpaceBetween,
 } from "@cloudscape-design/components";
-import { OllamaDelegate } from "./OllamaDelegate";
-import { useGetDataS3 } from "../../api/mutation";
 
 export const Delegate = () => {
   const list = useListS3("");
